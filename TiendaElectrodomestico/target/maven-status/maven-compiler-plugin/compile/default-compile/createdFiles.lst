@@ -1,0 +1,5 @@
+agenda\tiendaelectrodomestico\conexion\Conexion.class
+agenda\tiendaelectrodomestico\dominio\Cliente.class
+agenda\tiendaelectrodomestico\datos\ClienteDAO.class
+agenda\tiendaelectrodomestico\datos\IClientes.class
+agenda\tiendaelectrodomestico\TiendaElectrodomestico.class
