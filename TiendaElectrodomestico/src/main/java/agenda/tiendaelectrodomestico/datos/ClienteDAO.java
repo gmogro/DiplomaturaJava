@@ -51,7 +51,33 @@ public class ClienteDAO implements IClientes{
 
     @Override
     public boolean buscarClientePorId(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection conexion = Conexion.getConection();
+        var sql = "SELECT * FROM cliente WHERE id = ?";
+        try{
+            ps = conexion.prepareStatement(sql);
+            ps.setInt(1, cliente.getId());
+            rs = ps.executeQuery();
+            if(rs.next()){
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setApellido(rs.getString("apellido"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setTelefono(rs.getString("telefono"));
+                cliente.setDireccion(rs.getString("direccion"));
+                return true;
+            }
+        }catch (Exception e){
+            System.out.println("Error al recuperar cliente por id: " + e.getMessage());
+        }
+        finally {
+            try{
+                conexion.close();
+            }catch (Exception e){
+                System.out.println("Error al cerrar conexion: " + e.getMessage());
+            }
+        }
+        return false;
     }
 
     @Override
